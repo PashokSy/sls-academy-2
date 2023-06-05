@@ -1,0 +1,12 @@
+{"username":"Pavlo","gender":"male","age":28}
+{"username":"Daria","gender":"female","age":23}
+{"username":"Max","gender":"male","age":28}
+{"username":"Umpalumpa","gender":"other","age":"unknown"}
+{"username":"Oksana","gender":"female","age":26}
+{"username":"Sergiy","gender":"male","age":30}
+{"username":"PAVLO","gender":"male","age":"unknown"}
+{"username":"Gregor","gender":"male","age":40}
+{"username":"Yana","gender":"female","age":23}
+{"username":"Peters","gender":"male","age":34}
+{"username":"Nomra","gender":"female","age":19}
+{"username":"John","gender":"male","age":19}
