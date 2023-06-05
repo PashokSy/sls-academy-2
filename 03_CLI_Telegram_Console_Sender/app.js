@@ -5,7 +5,7 @@ process.env['NTBA_FIX_350'] = 1;
 const TelegramBot = require('node-telegram-bot-api');
 const token = '6198202858:AAERjUx5m9zVMSPY9FQTO5I_ABBRFle4sBE';
 const bot = new TelegramBot(token, { polling: true });
-
+// chat id hardcoded
 const chatId = '309745893';
 
 // commander
