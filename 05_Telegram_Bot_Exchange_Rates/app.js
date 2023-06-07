@@ -21,10 +21,19 @@ bot.onText(/Курс валют/, (msg) => {
     'Оберіть валюту, для якої бажаєте отримати обмінний курс.',
     {
       reply_markup: {
-        keyboard: [['USD'], ['EUR']],
+        keyboard: [['USD', 'EUR'], ['Попереднє меню']],
       },
     }
   );
+});
+
+bot.onText(/Попереднє меню/, (msg) => {
+  const chatId = msg.chat.id;
+  bot.sendMessage(chatId, 'Повертаємось до попереднього меню', {
+    reply_markup: {
+      keyboard: [['Курс валют']],
+    },
+  });
 });
 
 bot.onText(/USD/, (msg) => {
@@ -42,7 +51,8 @@ bot.on('message', (msg) => {
     msg.text !== '/start' &&
     msg.text !== 'USD' &&
     msg.text !== 'EUR' &&
-    msg.text !== 'Курс валют';
+    msg.text !== 'Курс валют' &&
+    msg.text !== 'Попереднє меню';
 
   if (notCommandMessage) {
     const chatId = msg.chat.id;
