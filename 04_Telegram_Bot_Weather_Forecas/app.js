@@ -2,6 +2,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const token = '6198202858:AAERjUx5m9zVMSPY9FQTO5I_ABBRFle4sBE';
 const bot = new TelegramBot(token, { polling: true });
+// weather
+const weather = require('./weather');
 
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
@@ -26,14 +28,16 @@ bot.onText(/Forecast in Zhovti Vody/, (msg) => {
   );
 });
 
-bot.onText(/at intervals of 3 hours/, (msg) => {
+bot.onText(/at intervals of 3 hours/, async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'you chose 3 hours interval');
+  const message = await weather.getHoursInterval(1);
+  bot.sendMessage(chatId, message);
 });
 
-bot.onText(/at intervals of 6 hours/, (msg) => {
+bot.onText(/at intervals of 6 hours/, async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'you chose 6 hours interval');
+  const message = await weather.getHoursInterval(2);
+  bot.sendMessage(chatId, message);
 });
 
 bot.on('message', (msg) => {
