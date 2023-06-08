@@ -2,6 +2,8 @@
 const TelegramBot = require('node-telegram-bot-api');
 const token = '6198202858:AAERjUx5m9zVMSPY9FQTO5I_ABBRFle4sBE';
 const bot = new TelegramBot(token, { polling: true });
+// currency rate
+const currencyRate = require('./currencyRate');
 
 bot.onText(/\/start/, (msg) => {
   const chatId = msg.chat.id;
@@ -36,14 +38,16 @@ bot.onText(/Попереднє меню/, (msg) => {
   });
 });
 
-bot.onText(/USD/, (msg) => {
+bot.onText(/USD/, async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'Обмінний курс для USD');
+  const message = await currencyRate.getPrivatCurrencyRate('USD');
+  bot.sendMessage(chatId, message);
 });
 
-bot.onText(/EUR/, (msg) => {
+bot.onText(/EUR/, async (msg) => {
   const chatId = msg.chat.id;
-  bot.sendMessage(chatId, 'Обмінний курс для EUR');
+  const message = await currencyRate.getPrivatCurrencyRate('EUR');
+  bot.sendMessage(chatId, message);
 });
 
 bot.on('message', (msg) => {
