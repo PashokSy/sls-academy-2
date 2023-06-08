@@ -11,11 +11,10 @@ async function getPrivatCurrencyRate(currency) {
     const data = apiResponse.data;
     for (i in data) {
       if (data[i].ccy === currency) {
-        // TODO fix slice in currency rate
         response =
           `Обмінний курс в Приват (${currency}): \n` +
-          ` Купівля: ${data[i].buy.slice(0, -3)} (UAH)\n` +
-          ` Продаж: ${data[i].sale.slice(0, -3)} (UAH)\n`;
+          ` Купівля: ${data[i].buy} (UAH)\n` +
+          ` Продаж: ${data[i].sale} (UAH)\n`;
       }
     }
   });
