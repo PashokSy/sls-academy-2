@@ -40,14 +40,18 @@ bot.onText(/Попереднє меню/, (msg) => {
 
 bot.onText(/USD/, async (msg) => {
   const chatId = msg.chat.id;
-  const message = await currencyRate.getPrivatCurrencyRate('USD');
-  bot.sendMessage(chatId, message);
+  const messagePrivat = await currencyRate.getPrivatCurrencyRate('USD');
+  bot.sendMessage(chatId, messagePrivat);
+  const messageMono = await currencyRate.getMonobankCurrencyRate('USD');
+  bot.sendMessage(chatId, messageMono);
 });
 
 bot.onText(/EUR/, async (msg) => {
   const chatId = msg.chat.id;
-  const message = await currencyRate.getPrivatCurrencyRate('EUR');
-  bot.sendMessage(chatId, message);
+  const messagePrivat = await currencyRate.getPrivatCurrencyRate('EUR');
+  bot.sendMessage(chatId, messagePrivat);
+  const messageMono = await currencyRate.getMonobankCurrencyRate('EUR');
+  bot.sendMessage(chatId, messageMono);
 });
 
 bot.on('message', (msg) => {
