@@ -21,9 +21,17 @@ function getArrayOfWords() {
   return words;
 }
 
+function uniqueValues() {
+  let wordsSet = new Set();
+  const words = getArrayOfWords();
+  words.forEach((word) => wordsSet.add(word));
+  const count = wordsSet.size;
+  return count;
+}
+
 start();
 
-let words = getArrayOfWords();
-console.log(words.length);
+let uniqueValuesCount = uniqueValues();
+console.log(uniqueValuesCount);
 
 end();
