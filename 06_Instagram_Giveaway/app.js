@@ -11,27 +11,19 @@ function end() {
   console.log(`\nElapsed time - ${timeDiff} seconds`);
 }
 
-function getArrayOfWords() {
-  let words = [];
+function uniqueValues() {
+  let wordsSet = new Set();
   for (i = 0; i < 20; i++) {
     const path = './static/out' + i + '.txt';
     const data = readFileSync(path).toString().split('\n');
-    words = words.concat(data);
+    data.forEach((word) => wordsSet.add(word));
   }
-  return words;
-}
-
-function uniqueValues() {
-  let wordsSet = new Set();
-  const words = getArrayOfWords();
-  words.forEach((word) => wordsSet.add(word));
-  const count = wordsSet.size;
-  return count;
+  return wordsSet.size;
 }
 
 start();
 
 let uniqueValuesCount = uniqueValues();
-console.log(uniqueValuesCount);
+console.log('uniqueValues() = ' + uniqueValuesCount);
 
 end();
