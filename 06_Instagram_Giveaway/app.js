@@ -21,9 +21,24 @@ function uniqueValues() {
   return wordsSet.size;
 }
 
+function existInAllFiles() {
+  const array = new Array();
+  for (i = 0; i < 20; i++) {
+    const wordsSet = new Set();
+    const path = './static/out' + i + '.txt';
+    const data = readFileSync(path).toString().split('\n');
+    data.forEach((word) => wordsSet.add(word));
+    array.push(wordsSet);
+  }
+
+  return array.length;
+}
+
 start();
 
-let uniqueValuesCount = uniqueValues();
+const uniqueValuesCount = uniqueValues();
 console.log('uniqueValues() = ' + uniqueValuesCount);
+const existInAllFilesCount = existInAllFiles();
+console.log('existInAllFiles() = ' + existInAllFilesCount);
 
 end();
