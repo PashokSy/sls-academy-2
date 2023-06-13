@@ -1,5 +1,13 @@
 // axios
 const axios = require('axios');
+// write file
+const { writeFileSync } = require('fs');
+
+class User {
+  constructor(userId, userName, vacations) {
+    (this.userId = userId), this.userName;
+  }
+}
 
 axios({
   method: 'get',
@@ -19,8 +27,14 @@ axios({
         },
       ],
     };
-    users.push(user);
+
+    let foundIndex = users.findIndex((item) => item.userId === user.userId);
+    if (foundIndex > -1) {
+      users[foundIndex].vacations.push(user.vacations[0]);
+    } else {
+      users.push(user);
+    }
   }
 
-  console.log(JSON.stringify(users));
+  writeFileSync('result.json', JSON.stringify(users, null, 2));
 });
