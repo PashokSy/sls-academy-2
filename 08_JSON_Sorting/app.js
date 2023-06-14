@@ -31,7 +31,7 @@ function findValue(object, key) {
   } else {
     // needed key is nested
     if (object instanceof Array) {
-      for (i = 0; i < object.length; i++) {
+      for (let i = 0; i < object.length; i++) {
         const value = findValue(object[i], key);
         if (value != undefined) return value;
       }
@@ -46,23 +46,32 @@ function findValue(object, key) {
 }
 
 async function request(endpoint, requestAttempts, requestAttemptsCount = 0) {
-  await axios({
+  return await axios({
     method: 'get',
     url: endpoint,
   })
-    .then(async (response) => {
-      const responseData = await response.data;
+    .then((response) => {
+      const responseData = response.data;
       const isDone = findValue(responseData, 'isDone');
-      console.log(`[Success] ${endpoint}: isDone - ${isDone}`);
+      return '\033[32m [Success] \033[0m' + `${endpoint}: isDone - ${isDone}`;
     })
     .catch((error) => {
       if (requestAttemptsCount >= requestAttempts) {
-        console.log(`[Fail] ${endpoint}: The endpoint is unavailable`);
+        return (
+          '\033[33m [Fail] \033[0m' + `${endpoint}: The endpoint is unavailable`
+        );
       } else {
         requestAttemptsCount++;
-        request(endpoint, requestAttempts, requestAttemptsCount);
+        return request(endpoint, requestAttempts, requestAttemptsCount);
       }
     });
 }
 
-endpoints.forEach((endpoint) => request(endpoint, 3));
+async function logMessages() {
+  for (let i = 0; i < endpoints.length; i++) {
+    const message = await request(endpoints[i], 3);
+    console.log(message);
+  }
+}
+
+logMessages();
